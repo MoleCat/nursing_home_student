@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+        <?import javafx.geometry.*?>
+        <?import javafx.scene.control.*?>
+        <?import javafx.scene.layout.*?>
+        <?import javafx.scene.paint.Paint.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="688.0" prefWidth="926.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<center>
+    <VBox id="vBox" alignment="CENTER" spacing="50.0" styleClass="vBox" stylesheets="@Application.css" BorderPane.alignment="CENTER" >
+        <Label alignment="CENTER" contentDisplay="CENTER"  text="Please Enter Your Login Data" textAlignment="CENTER" style="-fx-text-fill: #ffffff">>
+            <font>
+                <Font size="36.0" />
+
+            </font>
+        </Label>
+
+        <children>
+            <TextField fx:id="txtLogin" maxWidth="200.0"  prefWidth="200.0" promptText="Login" />
+        </children>
+
+        <children>
+            <TextField fx:id="txtPassword" maxWidth="200.0" prefWidth="200.0" promptText="Password" />
+        </children>
+        <children>
+            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#handleCheckIsEqualPassword" prefWidth="90.0" text="Login" />
+        </children>
+    </VBox>
+</center>
+</BorderPane>
