@@ -6,10 +6,15 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 
 public class TreatmentDAO extends DAOimp<Treatment> {
 
@@ -42,7 +47,7 @@ public class TreatmentDAO extends DAOimp<Treatment> {
 
     @Override
     protected String getReadAllStatementString() {
-        return "SELECT * FROM treatment";
+        return "SELECT * FROM treatment WHERE finished = false";
     }
 
     @Override
@@ -71,6 +76,18 @@ public class TreatmentDAO extends DAOimp<Treatment> {
     @Override
     protected String getDeleteStatementString(long key) {
         return String.format("Delete FROM treatment WHERE tid= %d", key);
+    }
+
+    @Override
+    protected String getSetFinishedOnBlockingState(long key) {
+        //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime ldt = LocalDateTime.now().plusYears(10);
+
+        return String.format("Update treatment SET finished = true " +
+                "WHERE pid = '%d'", key);
+//        return String.format("Update treatment SET finished = true, finishedFrom = '%s' " +
+//                        "WHERE tid = '%d'",
+//                ldt, key);
     }
 
     public List<Treatment> readTreatmentsByPid(long pid) throws SQLException {

@@ -2,10 +2,12 @@ package datastorage;
 
 import model.Patient;
 import utils.DateConverter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -63,7 +65,7 @@ public class PatientDAO extends DAOimp<Patient> {
      */
     @Override
     protected String getReadAllStatementString() {
-        return "SELECT * FROM patient";
+        return "SELECT * FROM patient WHERE finished = false";
     }
 
     /**
@@ -106,4 +108,17 @@ public class PatientDAO extends DAOimp<Patient> {
     protected String getDeleteStatementString(long key) {
         return String.format("Delete FROM patient WHERE pid=%d", key);
     }
+
+    @Override
+    protected String getSetFinishedOnBlockingState(long key) {
+        long now = System.currentTimeMillis();
+
+        Timestamp timestamp = new Timestamp(now);
+
+        String str = String.format("Update patient SET finished = '%s', finishedFrom = '%s' WHERE pid = '%d'", true, timestamp, key);
+
+        return str;
+    }
+
+
 }

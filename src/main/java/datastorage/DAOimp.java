@@ -53,6 +53,12 @@ public abstract class DAOimp<T> implements DAO<T>{
         st.executeUpdate(getDeleteStatementString(key));
     }
 
+    @Override
+    public void blockById(long key) throws SQLException {
+        Statement st = conn.createStatement();
+        st.executeUpdate(getSetFinishedOnBlockingState(key));
+    }
+
     protected abstract String getCreateStatementString(T t);
 
     protected abstract String getReadByIDStatementString(long key);
@@ -66,4 +72,8 @@ public abstract class DAOimp<T> implements DAO<T>{
     protected abstract String getUpdateStatementString(T t);
 
     protected abstract String getDeleteStatementString(long key);
+
+    protected abstract String getSetFinishedOnBlockingState(long key);
+
+
 }

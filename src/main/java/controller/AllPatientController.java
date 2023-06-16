@@ -38,6 +38,8 @@ public class AllPatientController {
     @FXML
     Button btnDelete;
     @FXML
+    Button btnBlock;
+    @FXML
     Button btnAdd;
     @FXML
     TextField txtSurname;
@@ -171,6 +173,19 @@ public class AllPatientController {
         try {
             tDao.deleteByPid(selectedItem.getPid());
             dao.deleteById(selectedItem.getPid());
+            this.tableView.getItems().remove(selectedItem);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handleBlockRow() {
+        //TreatmentDAO tDao = DAOFactory.getDAOFactory().createTreatmentDAO();
+        Patient selectedItem = this.tableView.getSelectionModel().getSelectedItem();
+        try {
+//            tDao.blockById(selectedItem.getPid());
+            dao.blockById(selectedItem.getPid());
             this.tableView.getItems().remove(selectedItem);
         } catch (SQLException e) {
             e.printStackTrace();

@@ -16,6 +16,7 @@ import model.Treatment;
 import datastorage.DAOFactory;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class AllTreatmentController {
     private Main main;
 
     public void initialize() {
+        deleteExpiredData();
         readAllAndShowInTableView();
         comboBox.setItems(myComboBoxData);
         comboBox.getSelectionModel().select(0);
@@ -63,6 +65,12 @@ public class AllTreatmentController {
         this.colDescription.setCellValueFactory(new PropertyValueFactory<Treatment, String>("description"));
         this.tableView.setItems(this.tableviewContent);
         createComboBoxData();
+    }
+
+    private void deleteExpiredData() {
+
+
+
     }
 
     public void readAllAndShowInTableView() {
